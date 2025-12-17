@@ -27,8 +27,8 @@ call :rename_files ".\Add-Ons\SageAttention-NEXT.bat" 	"SageAttention.bat"
 echo.
 
 :: Add a path just in case ::
-if exist %windir%\System32 set path=%PATH%;%windir%\System32
-if exist %windir%\System32\WindowsPowerShell\v1.0 set path=%PATH%;%windir%\System32\WindowsPowerShell\v1.0
+if exist "%windir%\System32" set "path=%PATH%;%windir%\System32"
+if exist "%windir%\System32\WindowsPowerShell\v1.0" set "path=%PATH%;%windir%\System32\WindowsPowerShell\v1.0"
 
 
 if not exist "Add-Ons" mkdir "Add-Ons"
@@ -57,8 +57,8 @@ if not exist "ComfyUI-Easy-Install.zip" (
 tar.exe -xf "ComfyUI-Easy-Install.zip" --strip-components=1 "ComfyUI-Easy-Install/%HLPR-NAME%"
 tar.exe -xf "%HLPR-NAME%" -C "Add-Ons" --strip-components=2 "ComfyUI-Easy-Install/Add-Ons"
 
-if exist ComfyUI-Easy-Install.zip del ComfyUI-Easy-Install.zip
-if exist %HLPR-NAME% del %HLPR-NAME%
+if exist "ComfyUI-Easy-Install.zip" del "ComfyUI-Easy-Install.zip"
+if exist "%HLPR-NAME%" del "%HLPR-NAME%"
 
 :: Create a shortcut on the desktop ::
 if exist ".\Add-Ons\Tools\ComfyUI-EZi.ico" if exist ".\Start ComfyUI.bat" (
@@ -67,11 +67,11 @@ if exist ".\Add-Ons\Tools\ComfyUI-EZi.ico" if exist ".\Start ComfyUI.bat" (
 	powershell -command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\ComfyUI-EZi.lnk'); $s.TargetPath='%cd%\Start ComfyUI.bat'; $s.WorkingDirectory='%cd%\'; $s.IconLocation='%cd%\Add-Ons\Tools\ComfyUI-EZi.ico'; $s.Save();"
 )
 
-if exist .\Add-Ons\Tools\AutoRun.bat (
+if exist ".\Add-Ons\Tools\AutoRun.bat" (
 	pushd %cd%
-	call .\Add-Ons\Tools\AutoRun.bat
+	call ".\Add-Ons\Tools\AutoRun.bat"
 	popd
-	del  .\Add-Ons\Tools\AutoRun.bat
+	del  ".\Add-Ons\Tools\AutoRun.bat"
 )
 
 :: Final Messages ::
