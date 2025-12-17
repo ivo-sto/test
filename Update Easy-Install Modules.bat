@@ -64,7 +64,7 @@ if exist %HLPR-NAME% del %HLPR-NAME%
 if exist ".\Add-Ons\Tools\ComfyUI-Easy-Install.ico" if exist ".\Start ComfyUI.bat" (
 	echo.
 	echo %green%::::::::::: Create a shortcut on the desktop :::::::::::%reset%
-	powershell -command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\ComfyUI-EZi.lnk'); $s.TargetPath='%cd%\Start ComfyUI.bat'; $s.WorkingDirectory='%cd%\'; $s.IconLocation='%cd%\Add-Ons\Tools\ComfyUI-Easy-Install.ico'; $s.Save();"
+	powershell -command "$s=(New-Object -ComObject WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\ComfyUI-EZi.lnk'); $s.TargetPath='%cd%\Start ComfyUI.bat'; $s.WorkingDirectory='%cd%\'; $s.IconLocation='%cd%\Add-Ons\Tools\ComfyUI-EZi.ico'; $s.Save();"
 )
 
 if exist .\Add-Ons\Tools\AutoRun.bat (
