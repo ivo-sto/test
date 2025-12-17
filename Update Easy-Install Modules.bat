@@ -54,7 +54,7 @@ if not exist "ComfyUI-Easy-Install.zip" (
 	exit
 )
 
-tar.exe -xf "ComfyUI-Easy-Install.zip" --strip-components=1 "ComfyUI-Easy-Install/%HLPR-NAME%"
+tar.exe -xf "ComfyUI-Easy-Install.zip" "%HLPR-NAME%"
 tar.exe -xf "%HLPR-NAME%" -C "Add-Ons" --strip-components=2 "ComfyUI-Easy-Install/Add-Ons"
 
 if exist "ComfyUI-Easy-Install.zip" del "ComfyUI-Easy-Install.zip"
