@@ -1,5 +1,5 @@
-@Echo off&&cd /D %~dp0
-Title 'Update Add-ons' v0.1.0 by ivo
+@Echo off&&cd /D %~dp0&&chcp 65001 >nul
+Title 'Update Easy-Install Modules' v0.1.0 by ivo
 :: Pixaroma Community Edition ::
 
 :: Set colors ::
