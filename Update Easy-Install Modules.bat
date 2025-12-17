@@ -12,7 +12,7 @@ if not exist "python_embeded" (
 	exit
 )
 
-echo %green%::: Updating %yellow%ComfyUI-Easy-Install\Add-Ons%green% folder. :::%reset%
+echo %green%::::: Updating %yellow%ComfyUI-Easy-Install\Add-Ons%green% folder :::::%reset%
 echo.
 
 :: Renaming files ::
@@ -34,11 +34,19 @@ if exist %windir%\System32\WindowsPowerShell\v1.0 set path=%PATH%;%windir%\Syste
 if not exist "Add-Ons" mkdir "Add-Ons"
 set "HLPR-NAME=Helper-CEI.zip"
 
-REM if not exist "ComfyUI-Easy-Install.zip" curl.exe -OL https://github.com/Tavris1/ComfyUI-Easy-Install/releases/latest/download/ComfyUI-Easy-Install.zip --ssl-no-revoke --retry 200 --retry-all-errors
+:: Disable only CRL/OCSP checks for SSL ::
+powershell -Command "[System.Net.ServicePointManager]::CheckCertificateRevocationList = $false"
 
-if not exist "ComfyUI-Easy-Install.zip" (
-	curl.exe -OL https://github.com/ivo-sto/test/releases/latest/download/ComfyUI-Easy-Install.zip --ssl-no-revoke --retry 200 --retry-all-errors
-)
+:: Ignore SSL certificate errors ::
+REM powershell -Command "Add-Type @'using System.Net;using System.Security.Cryptography.X509Certificates;public class TrustAllCertsPolicy : ICertificatePolicy {public bool CheckValidationResult(ServicePoint srvPoint,X509Certificate certificate,WebRequest request,int certificateProblem){return true;}}'@;[System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy"
+
+:: ------------------------------------------------------------------------------
+
+REM powershell -Command "Invoke-WebRequest -Uri 'https://github.com/Tavris1/ComfyUI-Easy-Install/releases/latest/download/ComfyUI-Easy-Install.zip' -OutFile 'ComfyUI-Easy-Install.zip' -UseBasicParsing"
+
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/ivo-sto/test/releases/latest/download/ComfyUI-Easy-Install.zip' -OutFile 'ComfyUI-Easy-Install.zip' -UseBasicParsing"
+
+:: ------------------------------------------------------------------------------
 
 if not exist "ComfyUI-Easy-Install.zip" (
     echo %red%::::::::::::::: Error downloading 'ComfyUI-Easy-Install.zip'%reset%
@@ -73,7 +81,7 @@ echo.
 echo %green%::::::::::::: You can read what's new here: ::::::::::::%reset%
 echo %yellow%https://github.com/Tavris1/ComfyUI-Easy-Install/releases%reset%
 echo.
-echo %yellow%::::::::::::::::: Press any key to exit ::::::::::::::::%reset%&Pause>nul
+echo %green%::::::::::::::::: Press any key to exit ::::::::::::::::%reset%&Pause>nul
 exit
 
 ::::::::::::::::::::::::::::::::: END :::::::::::::::::::::::::::::::::
